@@ -1,0 +1,179 @@
+/******* Base ********/
+
+@font-face {
+    font-family: Nunito;
+    src: url("/res/font/Nunito/Nunito-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url("/res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf");
+}
+
+* {
+    box-sizing: border-box;
+    font: inherit;
+    background: transparent;
+    color: inherit;
+    outline: none;
+    border: 0;
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background: url("/res/TEMP_bg.png") center;
+    overflow: hidden;
+
+    font-family: Nunito, Arial, sans-serif;
+    font-size: 20px;
+}
+
+h1 {
+    font-size: 64px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+p {
+    margin: 6px 0;
+}
+
+/****** Screens ******/
+
+@property --active-screen {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+div#screens-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    transform-origin: 50vw -50vw;
+    transform: rotate(calc(var(--active-screen) * 90deg));
+    transition: transform .75s;
+}
+
+div#screens-container>div {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+
+    --screen-number: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+    transform-origin: 50vw -50vw;
+    transform: rotate(calc(var(--screen-number) * -90deg));
+
+    padding: 0 max(10px, calc(50vw - 300px));
+}
+div#screens-container>div:nth-child(1) { --screen-number: 0 }
+div#screens-container>div:nth-child(2) { --screen-number: 1 }
+div#screens-container>div:nth-child(3) { --screen-number: 2 }
+
+/******* Title *******/
+
+div#title>p {
+    margin-top: -4px;
+    margin-bottom: 32px;
+    font-size: 16px;
+}
+div#title>button#play-button {
+    border: 0;
+    width: fit-content;
+    padding: 5px 15px;
+    background-color: #08f;
+    border-radius: 35px;
+    color: white;
+    transition: transform .2s;
+    transform: scale(1);
+}
+div#title>button#play-button:hover {
+    transform: scale(1.1);
+}
+div#title>button#play-button>span#play-icon {
+    font-family: "JetBrains Mono", sans-serif;
+}
+
+/******* Start *******/
+.select-container {
+    position: relative;
+    display: flex;
+    /*width: 100%;*/
+    width: fit-content;
+    border-radius: 16px;
+    background-color: #08f;
+    color: white;
+}
+.select-container input[type=radio] {
+    display: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.select-container label {
+    flex-basis: 1px;
+    flex-grow: 1;
+    text-align: center;
+    margin: 3px 10px;
+}
+.select-container span:last-child {
+    position: absolute;
+    display: block;
+    width: 20%; height: 100%;
+    outline: 2px solid white;
+    border-radius: 16px;
+    outline-offset: -4px;
+    left: 0;
+    transition: left .25s;
+}
+
+.select-container input:checked +*+*+*+*+*+*+*+ span:last-child { left: 20% }
+.select-container input:checked +*+*+*+*+*+ span:last-child { left: 40% }
+.select-container input:checked +*+*+*+ span:last-child { left: 60% }
+.select-container input:checked +*+ span:last-child { left: 80% }
+
+
+label.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+label.toggle>input[type=checkbox] {
+    display: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+label.toggle>span.toggle-switch {
+    display: inline-block;
+    width: 48px;
+    height: 24px;
+    border-radius: 12px;
+    background-color: gray;
+    margin-right: 12px;
+    position: relative;
+}
+label.toggle>span.toggle-switch::after {
+    position: absolute;
+    content: "";
+    display: block;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    left: 2px;
+    background: white;
+}

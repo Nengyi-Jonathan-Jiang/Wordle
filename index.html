@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Word Guessing Game</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<div id="screens-container" style="--active-screen: 0">
+    <div id="title">
+        <h1> Word Guesser </h1>
+        <p> By NJonathanJiang </p>
+        <button id="play-button"> Play <span id="play-icon">|></span></button>
+    </div>
+    <div id="start">
+        <h1> Game Setup </h1>
+        <p class="select-container">
+            <input type="radio" name="word-length" id="word-length-4">
+            <label for="word-length-4">4 letters</label>
+            <input type="radio" name="word-length" id="word-length-5" checked>
+            <label for="word-length-5">5 letters</label>
+            <input type="radio" name="word-length" id="word-length-6">
+            <label for="word-length-6">6 letters</label>
+            <input type="radio" name="word-length" id="word-length-7">
+            <label for="word-length-7">7 letters</label>
+            <input type="radio" name="word-length" id="word-length-8">
+            <label for="word-length-8">8 letters</label>
+            <span class="select-marker"></span>
+        </p>
+        <p>
+            <label for="use-lenient" class="toggle">
+                <input type="checkbox" id="use-lenient" checked>
+                <span class="toggle-switch"></span>
+                <span>Only allow real words</span>
+            </label>
+        </p>
+        <div>
+            <button>Start Game!</button>
+        </div>
+    </div>
+    <div id="game">
+        <div id="history">
+            <div class="wordle-result">
+                <span class="wordle-letter correct">w</span>
+                <span class="wordle-letter correct">o</span>
+                <span class="wordle-letter misplaced">r</span>
+                <span class="wordle-letter incorrect">d</span>
+                <span class="wordle-letter misplaced">s</span>
+            </div>
+        </div>
+        <div id="input">
+            <input type="text" id="guess-input">
+            <button> Submit Guess</button>
+        </div>
+    </div>
+</div>
+<script src="script.js" type="module"></script>
+</body>
+</html>
