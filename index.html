@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Word Guessing Game</title>
+    <link rel="stylesheet" href="ui.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
@@ -9,7 +10,7 @@
     <div id="title">
         <h1> Word Guesser </h1>
         <p> By NJonathanJiang </p>
-        <button id="play-button"> Play <span id="play-icon">|></span></button>
+        <button id="play-button" class="play-button"> Play </button>
     </div>
     <div id="start">
         <h1> Game Setup </h1>
@@ -30,7 +31,7 @@
             <label for="use-lenient" class="toggle">
                 <input type="checkbox" id="use-lenient" checked>
                 <span class="toggle-switch"></span>
-                <span>Only allow real words</span>
+                <span>Only real words</span>
             </label>
         </p>
         <div>

@@ -1,0 +1,107 @@
+button {
+    border: 0;
+    width: fit-content;
+    padding: 5px 15px;
+    background-color: #08f;
+    border-radius: 35px;
+    color: white;
+    transition: transform .2s;
+    transform: scale(1);
+}
+button:hover {
+    transform: scale(1.1);
+}
+button.play-button::after {
+    content: '|>';
+    font-family: "JetBrains Mono", sans-serif;
+}
+
+
+.select-container {
+    position: relative;
+    display: flex;
+    /*width: 100%;*/
+    width: fit-content;
+    border-radius: 16px;
+    background-color: #08f;
+    color: white;
+    user-select: none;
+}
+.select-container input[type=radio] {
+    display: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.select-container label {
+    flex-basis: 1px;
+    flex-grow: 1;
+    text-align: center;
+    margin: 3px 10px;
+    transition: transform .2s;
+    transform: scale(1);
+}
+
+.select-container span:last-child:hover,
+.select-container label:hover,
+.select-container input:checked + label:has(~ span:last-child:hover) {
+    transform: scale(1.1);
+}
+
+.select-container span:last-child {
+    position: absolute;
+    display: block;
+    width: 20%; height: 100%;
+    outline: 2px solid white;
+    border-radius: 16px;
+    outline-offset: -4px;
+    left: 0;
+    transform: scale(1);
+    transition: left .25s, transform .2s;
+}
+
+.select-container input:checked +*+*+*+*+*+*+*+ span:last-child { left: 20% }
+.select-container input:checked +*+*+*+*+*+ span:last-child { left: 40% }
+.select-container input:checked +*+*+*+ span:last-child { left: 60% }
+.select-container input:checked +*+ span:last-child { left: 80% }
+
+
+label.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    user-select: none;
+}
+
+label.toggle>input[type=checkbox] {
+    display: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+label.toggle>span.toggle-switch {
+    display: inline-block;
+    width: 48px;
+    height: 24px;
+    border-radius: 12px;
+    background-color: gray;
+    margin-right: 12px;
+    position: relative;
+    transition: background-color .25s;
+}
+
+label.toggle>span.toggle-switch::after {
+    position: absolute;
+    content: "";
+    display: block;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    top: 2px;
+    left: 2px;
+    background-color: white;
+    transition: left .25s;
+}
+
+label.toggle>input:checked + span.toggle-switch { background: #08f }
+
+label.toggle>input:checked + span.toggle-switch::after { left: 26px }
