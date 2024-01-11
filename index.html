@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Word Guessing Game</title>
     <link rel="stylesheet" href="ui.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-<div id="screens-container" style="--active-screen: 2">
+<div id="screens-container" style="--active-screen: 0">
     <div id="title">
         <div>
             <h1> Word Guesser </h1>
@@ -15,6 +16,9 @@
         </div>
     </div>
     <div id="start">
+        <div class="corner">
+            <button id="start-back-button" class="back-button"></button>
+        </div>
         <div>
             <h1> Game Setup </h1>
             <div>
@@ -48,61 +52,14 @@
         </div>
     </div>
     <div id="game">
-        <div>
-            <div id="history">
-                <!-- actual word: serenade -->
-                <div class="wordle-result">
-                    <span class="wordle-letter incorrect">t</span>
-                    <span class="wordle-letter incorrect">o</span>
-                    <span class="wordle-letter misplaced">e</span>
-                    <span class="wordle-letter misplaced">n</span>
-                    <span class="wordle-letter misplaced">a</span>
-                    <span class="wordle-letter incorrect">i</span>
-                    <span class="wordle-letter incorrect">l</span>
-                    <span class="wordle-letter misplaced">s</span>
-
-                </div>
-                <div class="wordle-result">
-                    <span class="wordle-letter incorrect">c</span>
-                    <span class="wordle-letter misplaced">r</span>
-                    <span class="wordle-letter incorrect">u</span>
-                    <span class="wordle-letter misplaced">s</span>
-                    <span class="wordle-letter incorrect">h</span>
-                    <span class="wordle-letter incorrect">i</span>
-                    <span class="wordle-letter misplaced">n</span>
-                    <span class="wordle-letter incorrect">g</span>
-                </div>
-                <div class="wordle-result">
-                    <span class="wordle-letter correct">s</span>
-                    <span class="wordle-letter misplaced">u</span>
-                    <span class="wordle-letter correct">r</span>
-                    <span class="wordle-letter incorrect">p</span>
-                    <span class="wordle-letter incorrect">r</span>
-                    <span class="wordle-letter incorrect">i</span>
-                    <span class="wordle-letter incorrect">s</span>
-                    <span class="wordle-letter correct">e</span>
-                </div>
-            </div>
-            <div id="wordle-input">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div id="wordle-input-background">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+        <div class="corner">
+            <button id="game-back-button" class="back-button"></button>
+        </div>
+        <div id="wordle-container">
+            <div id="history"></div>
+            <div id="wordle-input"></div>
+            <div id="wordle-input-background"></div>
+			<div id="wordle-keyboard"></div>
         </div>
     </div>
 </div>

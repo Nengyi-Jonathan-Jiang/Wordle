@@ -41,11 +41,11 @@ export class Wordle {
 /** @typedef {WordleResult.CORRECT | WordleResult.MISPLACED | WordleResult.INCORRECT} WordleCharacterResult */
 export class WordleResult {
     // noinspection JSValidateTypes
-    /** @type {WordleCharacterResult} */ static CORRECT = Symbol();
+    /** @type {WordleCharacterResult} */ static CORRECT = 'correct';
     // noinspection JSValidateTypes
-    /** @type {WordleCharacterResult} */ static MISPLACED = Symbol();
+    /** @type {WordleCharacterResult} */ static MISPLACED = 'misplaced';
     // noinspection JSValidateTypes
-    /** @type {WordleCharacterResult} */ static INCORRECT = Symbol();
+    /** @type {WordleCharacterResult} */ static INCORRECT = 'incorrect';
 
     /** @type {number} */
     wordLength;
@@ -145,53 +145,5 @@ export class WordleResult {
             } else if (this.results[i] !== WordleResult.INCORRECT) return true
         }
         return true;
-    }
-}
-
-
-export class WordleGame {
-    /** @type {number} */
-    wordLength;
-    /** @type {boolean} */
-    allowAnyWord;
-
-    /** @type {string} */
-    targetWord;
-    /** @type {WordleResult[]} */
-    previousResults;
-
-    /**
-     * @param {number} wordLength
-     * @param {boolean} allowAnyWord
-     */
-    constructor(wordLength, allowAnyWord) {
-        this.wordLength = wordLength;
-        this.allowAnyWord = allowAnyWord;
-
-        this.restartGame();
-    }
-
-    restartGame() {
-        this.targetWord = Wordle.getRandomWord(this.wordLength);
-        this.previousResults = [];
-    }
-
-    /** @param {string} guess */
-    guess(guess) {
-        if(guess.length !== this.wordLength) {
-            return { error: 'Wrong word length' }
-        }
-        if(!this.allowAnyWord && !Wordle.dictionaryContains(guess)) {
-            return { error: 'Word does not exist' }
-        }
-
-        const result = WordleResult.generate(this.wordLength, this.targetWord, guess);
-        this.previousResults.push(result);
-
-        return result;
-    }
-
-    get isFinished() {
-        return !!this.previousResults?.[this.previousResults.length - 1]?.success;
     }
 }
