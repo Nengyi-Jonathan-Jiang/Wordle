@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: Nunito;
-    src: url("/res/font/Nunito/Nunito-VariableFont_wght.ttf");
+    src: url("res/font/Nunito/Nunito-VariableFont_wght.ttf");
 }
 
 @font-face {
     font-family: 'JetBrains Mono';
-    src: url("/res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf");
+    src: url("res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf");
 }
 
 * {
@@ -27,7 +27,7 @@ body {
     top: 0;
     left: 0;
     background-size: cover;
-    background: url("/res/TEMP_bg.png") center;
+    background: url("res/TEMP_bg.png") center;
     overflow: hidden;
 
     font-family: Nunito, Arial, sans-serif;
