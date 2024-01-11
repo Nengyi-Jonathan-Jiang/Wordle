@@ -19,7 +19,7 @@ button.play-button::after {
 
 .select-container {
     position: relative;
-    display: flex;
+    display: inline-flex;
     /*width: 100%;*/
     width: fit-content;
     border-radius: 16px;
@@ -37,14 +37,6 @@ button.play-button::after {
     flex-grow: 1;
     text-align: center;
     margin: 3px 10px;
-    transition: transform .2s;
-    transform: scale(1);
-}
-
-.select-container span:last-child:hover,
-.select-container label:hover,
-.select-container input:checked + label:has(~ span:last-child:hover) {
-    transform: scale(1.1);
 }
 
 .select-container span:last-child {
@@ -55,8 +47,7 @@ button.play-button::after {
     border-radius: 16px;
     outline-offset: -4px;
     left: 0;
-    transform: scale(1);
-    transition: left .25s, transform .2s;
+    transition: left .25s;
 }
 
 .select-container input:checked +*+*+*+*+*+*+*+ span:last-child { left: 20% }
@@ -87,6 +78,13 @@ label.toggle>span.toggle-switch {
     margin-right: 12px;
     position: relative;
     transition: background-color .25s;
+}
+
+label.toggle>input[type=checkbox]:not(:checked)~span[data-switch-off]::after {
+    content: attr(data-switch-off);
+}
+label.toggle>input[type=checkbox]:checked~span[data-switch-on]::after {
+    content: attr(data-switch-on);
 }
 
 label.toggle>span.toggle-switch::after {

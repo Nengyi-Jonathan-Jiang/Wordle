@@ -1,14 +1,11 @@
 export class Wordle {
-    constructor() {
-    }
-
     /** @param {String} word */
-    exists(word) {
+    static dictionaryContains(word) {
         return Wordle.dictionary.has(word.toUpperCase()) || Wordle.dictionary.has(word.toUpperCase());
     }
 
     /** @param {Number} length */
-    getRandomWord(length) {
+    static getRandomWord(length) {
         let words = [...Wordle.words.get(length)];
         if (words.length === 0) throw new Error("No words with this length exist in my word bank!");
         return words[~~(words.length * Math.random())];
@@ -43,20 +40,34 @@ export class Wordle {
 
 /** @typedef {WordleResult.CORRECT | WordleResult.MISPLACED | WordleResult.INCORRECT} WordleCharacterResult */
 export class WordleResult {
-    static CORRECT = {};
-    static MISPLACED = {};
-    static INCORRECT = {};
+    // noinspection JSValidateTypes
+    /** @type {WordleCharacterResult} */ static CORRECT = Symbol();
+    // noinspection JSValidateTypes
+    /** @type {WordleCharacterResult} */ static MISPLACED = Symbol();
+    // noinspection JSValidateTypes
+    /** @type {WordleCharacterResult} */ static INCORRECT = Symbol();
 
     /** @type {number} */
     wordLength;
     /** @type {string} */
     guess;
-    /** @type {string} */
-    target;
     /** @type {WordleCharacterResult[]} */
     results;
     /** @type {boolean} */
     success;
+
+    /**
+     * @param {number} wordLength
+     * @param {string} guess
+     * @param {WordleCharacterResult[]} results
+     * @param {boolean} success
+     */
+    constructor(wordLength, guess, results, success) {
+        this.wordLength =  wordLength;
+        this.guess = guess;
+        this.results = results;
+        this.success = success;
+    }
 
     /**
      * @param {Number} wordLength
@@ -66,44 +77,48 @@ export class WordleResult {
      * @param {String} guess
      *      The guessed word. Must match wordLength
      */
-    constructor(wordLength, target, guess) {
-        this.wordLength = wordLength;
-        this.guess = guess;
-        this.target = target;
+    static generate(wordLength, target, guess) {
+        /** @type {WordleCharacterResult[]} */
+        const results = new Array(wordLength).fill(WordleResult.INCORRECT);
 
-        /** @type {Number[]} */
-        this.results = new Array(wordLength).fill(WordleResult.INCORRECT);
+        const success = guess === target;
 
-        this.success = guess === target;
+        if (success) results.fill(WordleResult.CORRECT);
+        else WordleResult.#calculateWordleResult(wordLength, target, guess, results);
 
-        if (this.success) this.results.fill(WordleResult.CORRECT); else this.generateResults();
+        return new WordleResult(wordLength, guess, results, success);
     }
 
-    /** @private */
-    generateResults() {
+    /**
+     * @param {number} wordLength
+     * @param {string} target
+     * @param {string} guess
+     * @param {WordleCharacterResult[]} results
+     */
+    static #calculateWordleResult(wordLength, target, guess, results) {
         /** @type {Map<String, Number>}} */
         let charCounts = new Map();
 
         // First pass - find correct chars, get char counts
-        for (let i = 0; i < this.wordLength; i++) {
-            let targetChar = this.target[i];
-            if (this.guess[i] === targetChar) {
-                this.results[i] = WordleResult.CORRECT;
+        for (let i = 0; i < wordLength; i++) {
+            let targetChar = target[i];
+            if (guess[i] === targetChar) {
+                results[i] = WordleResult.CORRECT;
             } else {
                 charCounts.set(targetChar, (charCounts.get(targetChar) || 0) + 1);
             }
         }
 
         // Second pass - determine misplaced/incorrect chars
-        for (let i = 0; i < this.wordLength; i++) {
-            if (this.results[i] === WordleResult.CORRECT) continue;
+        for (let i = 0; i < wordLength; i++) {
+            if (results[i] === WordleResult.CORRECT) continue;
 
-            let guessedChar = this.guess[i];
+            let guessedChar = guess[i];
             if (charCounts.get(guessedChar) > 0) {
                 charCounts.set(guessedChar, charCounts.get(guessedChar) - 1);
-                this.results[i] = WordleResult.MISPLACED;
+                results[i] = WordleResult.MISPLACED;
             } else {
-                this.results[i] = WordleResult.INCORRECT;
+                results[i] = WordleResult.INCORRECT;
             }
         }
     }
@@ -130,5 +145,53 @@ export class WordleResult {
             } else if (this.results[i] !== WordleResult.INCORRECT) return true
         }
         return true;
+    }
+}
+
+
+export class WordleGame {
+    /** @type {number} */
+    wordLength;
+    /** @type {boolean} */
+    allowAnyWord;
+
+    /** @type {string} */
+    targetWord;
+    /** @type {WordleResult[]} */
+    previousResults;
+
+    /**
+     * @param {number} wordLength
+     * @param {boolean} allowAnyWord
+     */
+    constructor(wordLength, allowAnyWord) {
+        this.wordLength = wordLength;
+        this.allowAnyWord = allowAnyWord;
+
+        this.restartGame();
+    }
+
+    restartGame() {
+        this.targetWord = Wordle.getRandomWord(this.wordLength);
+        this.previousResults = [];
+    }
+
+    /** @param {string} guess */
+    guess(guess) {
+        if(guess.length !== this.wordLength) {
+            return { error: 'Wrong word length' }
+        }
+        if(!this.allowAnyWord && !Wordle.dictionaryContains(guess)) {
+            return { error: 'Word does not exist' }
+        }
+
+        const result = WordleResult.generate(this.wordLength, this.targetWord, guess);
+        this.previousResults.push(result);
+
+        return result;
+    }
+
+    get isFinished() {
+        return !!this.previousResults?.[this.previousResults.length - 1]?.success;
     }
 }

@@ -71,13 +71,13 @@ div#screens-container>div {
 
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-items: center;
     justify-content: center;
 
     transform-origin: 50vw -50vw;
     transform: rotate(calc(var(--screen-number) * -90deg));
 
-    padding: 0 max(10px, calc(50vw - 300px));
+    padding: 0 max(10px, calc(50vw - 312px));
 }
 div#screens-container>div:nth-child(1) { --screen-number: 0 }
 div#screens-container>div:nth-child(2) { --screen-number: 1 }
@@ -85,12 +85,12 @@ div#screens-container>div:nth-child(3) { --screen-number: 2 }
 
 /******* Title *******/
 
-div#title>p {
+div#title p {
     margin-top: -4px;
     margin-bottom: 32px;
     font-size: 16px;
 }
-div#title>button#play-button {
+div#title button#play-button {
     border: 0;
     width: fit-content;
     padding: 5px 15px;
@@ -100,11 +100,66 @@ div#title>button#play-button {
     transition: transform .2s;
     transform: scale(1);
 }
-div#title>button#play-button:hover {
+div#title button#play-button:hover {
     transform: scale(1.1);
 }
-div#title>button#play-button>span#play-icon {
+div#title button#play-button>span#play-icon {
     font-family: "JetBrains Mono", sans-serif;
 }
 
-/******* Start *******/
+/****** Wordle *****/
+
+#history {
+    width: fit-content;
+}
+
+#wordle-input {
+    border-top: 3px solid black;
+    margin-top: 4px;
+    padding-top: 4px;
+    width: fit-content;
+}
+
+.wordle-letter, #wordle-input>span {
+    font-size: 52px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    width: 64px;
+    height: 64px;
+    margin: 4px;
+    display: inline-flex;
+    border: 3px solid black;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.wordle-letter {
+    --color: #000;
+    background: var(--color);
+    border-color: white;
+    color: white;
+}
+
+.wordle-letter.incorrect {
+    --color: #444;
+}
+.wordle-letter.misplaced {
+    --color: #db0;
+}
+.wordle-letter.correct {
+    --color: #0b7;
+}
+
+#wordle-input>span:not([data-letter]) {
+    border-color: #ddd;
+}
+
+#wordle-input>span:not([data-letter])::before {
+    content: "-";
+    color: transparent;
+}
+
+#wordle-input>span[data-letter]::before {
+    content: attr(data-letter);
+}
