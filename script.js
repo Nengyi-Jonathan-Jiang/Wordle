@@ -48,3 +48,31 @@ document.getElementById('start-game-button').onclick = _ => {
 
     console.log(currentGame);
 }
+
+
+
+function __TEMP_addRow(){
+    let cont = document.createElement('div');
+    cont.className = 'wordle-result';
+    for(let i = 0; i < 8; i++) {
+        let s = document.createElement('span');
+        s.className = `wordle-letter ${
+            'correct incorrect misplaced'.split(' ')[i%3]
+        }`
+        s.innerText = 'serenity'[i];
+        cont.appendChild(s);
+    }
+    document.getElementById('history').appendChild(cont);
+
+    for(let c of document.getElementById('wordle-input-background').children) {
+        // console.log(c);
+        c.classList.toggle('a');
+    }
+    document.body.clientHeight;
+    for(let c of document.getElementById('wordle-input-background').children) {
+        // console.log(c);
+        c.classList.toggle('a');
+    }
+}
+
+window.__TEMP_addRow = __TEMP_addRow
