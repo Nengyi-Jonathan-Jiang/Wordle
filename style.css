@@ -21,11 +21,11 @@
 
 body {
     margin: 0;
-    width: 100vw;
-    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     background-size: cover;
     background: url("res/TEMP_bg.png") center;
     overflow: hidden;
@@ -120,20 +120,24 @@ div#title button#play-button>span#play-icon {
     font-size: 0;
     max-height: calc(100vh - 128px);
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
-    justify-content: end;
+    overflow: scroll;
+}
+
+#wordle-container::-webkit-scrollbar {
+    display: none;
 }
 
 #history {
-    margin-bottom: 196px;
+    margin-bottom: 78px;
 }
 
 #wordle-input, #wordle-input-background, #end-game-container {
     position: absolute;
     border-top: 3px solid black;
     height: 76px;
-    bottom: 120px;
+    bottom: 0;
     padding-top: 4px;
 }
 
@@ -164,6 +168,15 @@ div#title button#play-button>span#play-icon {
 
 #wordle-input>span:not([data-letter]){
     opacity: 0;
+}
+
+#wordle-input>span {
+    transition: transform .2s;
+    transform: scale(1)
+}
+
+#wordle-input>span:hover {
+    transform: scale(1.1);
 }
 
 .wordle-letter {
@@ -239,19 +252,20 @@ div#title button#play-button>span#play-icon {
     margin: 12px 16px;
 }
 
-
-
 #wordle-keyboard {
-    position: absolute;
-    bottom: 0;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    white-space: nowrap;
+    margin-top: 8px;
 }
 
-#wordle-keyboard span.wordle-keyboard-letter {
+#wordle-keyboard .wordle-keyboard-letter {
     font-size: 18px;
     display: inline-flex;
+    background: white;
+    padding: 0;
     margin: 4px;
     width: 28px;
     height: 28px;
@@ -259,40 +273,45 @@ div#title button#play-button>span#play-icon {
     justify-content: center;
     font-family: 'JetBrains Mono', monospace;
     border-radius: 5px;
-    border: 3px solid #888;
+    border: 2px solid #888;
     font-weight: bold;
     color: #888;
 }
-#wordle-keyboard span.wordle-keyboard-letter.incorrect {
+
+#wordle-keyboard .wordle-keyboard-letter:hover {
+    transform: scale(1.2);
+}
+
+#wordle-keyboard .wordle-keyboard-letter.incorrect {
     border-color: #444;
     background-color: #444;
     color: white;
 }
-#wordle-keyboard span.wordle-keyboard-letter.misplaced {
+#wordle-keyboard .wordle-keyboard-letter.misplaced {
     border-color: #eb0;
     background-color: #eb0;
     color: white;
 }
-#wordle-keyboard span.wordle-keyboard-letter.correct {
+#wordle-keyboard .wordle-keyboard-letter.correct {
     border-color: #3b5;
     background-color: #3b5;
     color: white;
 }
 
-#wordle-container:not([data-finished])>#end-game-container {
+#wordle-container:not([data-finished]) #end-game-container {
     display: none;
 }
 
-#wordle-container:not([data-finished])>#end-game-container>#restart-game-button {
+#wordle-container:not([data-finished]) #end-game-container>#restart-game-button {
     display: none;
 }
-#wordle-container[data-finished]>#end-game-container>#restart-game-button {
+#wordle-container[data-finished] #end-game-container>#restart-game-button {
     display: inline-block;
     animation: rotate-appear 1s;
     transform: rotate(180deg);
     transition: transform .2s;
 }
-#wordle-container[data-finished]>#end-game-container>#restart-game-button:hover {
+#wordle-container[data-finished] #end-game-container>#restart-game-button:hover {
     transform: rotate(180deg) scale(1.2);
 }
 
@@ -313,4 +332,10 @@ button#restart-game-button {
 #wordle-container[data-finished] div#wordle-input,
 #wordle-container[data-finished] div#wordle-input-background {
     display: none;
+}
+
+#wordle-scroller {
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }

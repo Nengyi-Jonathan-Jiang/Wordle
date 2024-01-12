@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Word Guessing Game</title>
-    <link rel="stylesheet" href="ui.css" type="text/css">
-    <link rel="stylesheet" href="style.css" type="text/css">
-</head>
-<body>
-<div id="screens-container" style="--active-screen: 0">
-    <div id="title">
-        <div>
-            <h1> Word Guesser </h1>
-            <p> By NJonathanJiang </p>
-            <button id="play-button" class="play-button"> Play</button>
-        </div>
-    </div>
-    <div id="start">
-        <div class="corner">
-            <button id="start-back-button" class="back-button"></button>
-        </div>
-        <div>
-            <h1> Game Setup </h1>
-            <div>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Word Guessing Game</title>
+		<link rel="stylesheet" href="ui.css" type="text/css">
+		<link rel="stylesheet" href="style.css" type="text/css">
+	</head>
+	<body>
+		<div id="screens-container" style="--active-screen: 0">
+			<div id="title">
+				<div>
+					<h1> Word Guesser </h1>
+					<p> By NJonathanJiang </p>
+					<button id="play-button" class="play-button"> Play</button>
+				</div>
+			</div>
+			<div id="start">
+				<div class="corner">
+					<button id="start-back-button" class="back-button"></button>
+				</div>
+				<div>
+					<h1> Game Setup </h1>
+					<div>
 						<span class="select-container">
 							<input type="radio" name="word-length" id="word-length-4">
 							<label for="word-length-4">4</label>
@@ -33,42 +33,62 @@
 							<label for="word-length-7">7</label>
 							<input type="radio" name="word-length" id="word-length-8">
 							<label for="word-length-8">8</label>
+							<input type="radio" name="word-length" id="word-length-9">
+							<label for="word-length-9">9</label>
+							<input type="radio" name="word-length" id="word-length-10">
+							<label for="word-length-10">10</label>
+							<input type="radio" name="word-length" id="word-length-11">
+							<label for="word-length-11">11</label>
+							<input type="radio" name="word-length" id="word-length-12">
+							<label for="word-length-12">12</label>
 							<span class="select-marker"></span>
 						</span>
-                <span> letter words </span>
-            </div>
-            <p>
-                <label for="only-real-words" class="toggle">
-                    <input type="checkbox" id="only-real-words" checked>
-                    <span class="toggle-switch"></span>
-                    <span
-                            data-switch-on="Only real words"
-                            data-switch-off="Allow any word"></span>
-                </label>
-            </p>
-            <div>
-                <button id="start-game-button">Start Game!</button>
-            </div>
-        </div>
-    </div>
-    <div id="game">
-        <div class="corner">
-            <button id="game-back-button" class="back-button"></button>
-        </div>
-        <div id="wordle-container">
-            <div id="history"></div>
-			<div id="end-game-container">
-				<div id="end-game-container-cover"></div>
-				<span id="info-left"></span>
-				<button id="restart-game-button"></button>
-				<span id="info-right"></span>
+						<span> letter words </span>
+					</div>
+					<p>
+						<label for="input-real-words" class="toggle">
+							<input type="checkbox" id="input-real-words" checked>
+							<span class="toggle-switch"></span>
+							<span
+								data-switch-on="Input real words"
+								data-switch-off="Input any word"></span>
+						</label>
+					</p>
+					<p>
+
+						<label for="guess-real-words" class="toggle">
+							<input type="checkbox" id="guess-real-words">
+							<span class="toggle-switch"></span>
+							<span
+								data-switch-on="Hard difficulty"
+								data-switch-off="Easy difficulty"></span>
+						</label>
+					</p>
+					<div>
+						<button id="start-game-button">Start Game!</button>
+					</div>
+				</div>
 			</div>
-            <div id="wordle-input"></div>
-            <div id="wordle-input-background"></div>
-			<div id="wordle-keyboard"></div>
-        </div>
-    </div>
-</div>
-<script src="script.js" type="module"></script>
-</body>
+			<div id="game">
+				<div class="corner">
+					<button id="game-back-button" class="back-button"></button>
+				</div>
+				<div id="wordle-container">
+					<div id="wordle-keyboard"></div>
+					<div id="wordle-scroller">
+						<div id="history"></div>
+						<div id="end-game-container">
+							<div id="end-game-container-cover"></div>
+							<span id="info-left"></span>
+							<button id="restart-game-button"></button>
+							<span id="info-right"></span>
+						</div>
+						<div id="wordle-input"></div>
+						<div id="wordle-input-background"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="script.js" type="module"></script>
+	</body>
 </html>

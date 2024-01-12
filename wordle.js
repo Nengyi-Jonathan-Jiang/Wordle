@@ -5,8 +5,14 @@ export class Wordle {
     }
 
     /** @param {Number} length */
-    static getRandomWord(length) {
+    static getRandomCommonWord(length) {
         let words = [...Wordle.words.get(length)];
+        if (words.length === 0) throw new Error("No words with this length exist in my word bank!");
+        return words[~~(words.length * Math.random())];
+    }
+
+    static getRandomObscureWord(length){
+        let words = [...Wordle.dictionary].filter(i => i.length === length).filter(i => !Wordle.words.get(length).has(i));
         if (words.length === 0) throw new Error("No words with this length exist in my word bank!");
         return words[~~(words.length * Math.random())];
     }
@@ -37,6 +43,8 @@ export class Wordle {
         Wordle.dictionary = new Set([...Wordle.dictionary, ...words.map(i => i.toUpperCase())]);
     }
 }
+
+window.Wordle = Wordle;
 
 /** @typedef {WordleResult.CORRECT | WordleResult.MISPLACED | WordleResult.INCORRECT} WordleCharacterResult */
 export class WordleResult {

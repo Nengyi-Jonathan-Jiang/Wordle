@@ -6,7 +6,7 @@ function changeScreenTo(screen) {
 
 // Load words
 
-for (let wordLength = 4; wordLength <= 8; wordLength++) {
+for (let wordLength = 4; wordLength <= 12; wordLength++) {
     console.log(`Loading ${wordLength} letter words`)
     let allWords = await (await fetch(`res/dictionary/allWords${wordLength}.txt`)).text();
     Wordle.updateDictionary(allWords.split(/\s+/g));
@@ -18,6 +18,8 @@ console.log("Loaded " + Wordle.dictionary.size + " words into dictionary");
 
 /** @type {string | null} */
 let targetWord = null;
+/** @type {WordleResult[]} */
+let previousGuesses = [];
 /** @type {(key:string) => boolean} */
 let onKeyPress = _ => {};
 /** @type {()=>any} */
@@ -47,37 +49,68 @@ document.getElementById('start-game-button').onclick = _ => {
         wordLength = 7;
     } else if (document.getElementById('word-length-8').checked) {
         wordLength = 8;
+    } else if (document.getElementById('word-length-9').checked) {
+        wordLength = 9;
+    } else if (document.getElementById('word-length-10').checked) {
+        wordLength = 10;
+    } else if (document.getElementById('word-length-11').checked) {
+        wordLength = 11;
+    } else if (document.getElementById('word-length-12').checked) {
+        wordLength = 12;
     }
 
-    startGame(wordLength, !document.getElementById('only-real-words').checked);
+    startGame(
+        wordLength,
+        !document.getElementById('input-real-words').checked,
+        document.getElementById('guess-real-words').checked
+    );
 
     changeScreenTo(2);
 }
 
 const keyboard = (function populateKeyboard(container) {
-    /** @type {Map<string, HTMLSpanElement>} */
+    /** @type {Map<string, HTMLButtonElement>} */
     let letters = new Map;
     for (let row of 'QWERTYUIOP ASDFGHJKL ZXCVBNM'.split(' ')) {
         let rowElement = document.createElement('div');
         for (let letter of row) {
-            let l = document.createElement('span');
+            let l = document.createElement('button');
             l.className = 'wordle-keyboard-letter';
             l.innerText = letter;
             letters.set(letter, l);
             rowElement.appendChild(l);
+            l.onclick = _ => onKeyPress(letter);
         }
         container.appendChild(rowElement);
     }
+
+    {
+        let enterKey = document.createElement('button');
+        enterKey.className = 'wordle-keyboard-letter';
+        enterKey.innerText = '↵';
+        enterKey.onclick = _ => onKeyPress('Enter');
+        container.lastChild.appendChild(enterKey);
+    }
+
     return letters;
 })(document.getElementById('wordle-keyboard'));
 
-function startGame(wordLength, allowAnyWord) {
-    targetWord = Wordle.getRandomWord(wordLength);
+/**
+ * @param {number} wordLength
+ * @param {boolean} allowAnyWord
+ * @param {boolean} guessAnyWord
+ */
+function startGame(wordLength, allowAnyWord, guessAnyWord) {
+    targetWord = guessAnyWord ? Wordle.getRandomObscureWord(wordLength) : Wordle.getRandomCommonWord(wordLength);
+
+    console.log(`started new wordle ${wordLength} ${allowAnyWord} ${guessAnyWord} ${targetWord}`)
+    previousGuesses = [];
     let wordleInput = document.getElementById('wordle-input');
     let wordleInputBackground = document.getElementById('wordle-input-background');
     let history = document.getElementById('history')
+    let container = document.getElementById('wordle-container');
 
-    delete document.getElementById('wordle-container').dataset.finished;
+    delete container.dataset.finished;
 
     while (wordleInputBackground.firstChild) wordleInputBackground.firstChild.remove();
     while (wordleInput.firstChild) wordleInput.firstChild.remove();
@@ -98,6 +131,8 @@ function startGame(wordLength, allowAnyWord) {
         );
     }
 
+    wordleInput.onclick = _ => onKeyPress('backspace');
+
     onKeyPress = (key) => {
         if (key.toLowerCase() === 'enter') {
             let guess = '';
@@ -116,13 +151,12 @@ function startGame(wordLength, allowAnyWord) {
                 addToHistory(result);
                 letterNodes.forEach(i => delete i.dataset.letter);
                 if (result.success) {
-                    console.log('success!');
                     document.querySelectorAll('#wordle-input-background>span').forEach(i => {
                         i.classList.add('hidden');
                     })
                     document.getElementById('wordle-container').dataset.finished = '';
                     onRestart = () => {
-                        startGame(wordLength, allowAnyWord);
+                        startGame(wordLength, allowAnyWord, guessAnyWord);
                     }
                 }
             }
@@ -160,7 +194,7 @@ function startGame(wordLength, allowAnyWord) {
 
 /** @param {WordleResult} result */
 function addToHistory(result) {
-
+    previousGuesses.push(result);
     let entry = document.createElement('div');
     entry.className = 'wordle-result';
     for (let i = 0; i < result.wordLength; i++) {
