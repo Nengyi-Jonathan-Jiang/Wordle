@@ -1,0 +1,41 @@
+@font-face {
+    font-family: Nunito;
+    src:         url("res/font/Nunito/Nunito-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    src:         url("res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf"),
+    url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff');
+}
+
+.wordle-letter {
+    --color:      #000;
+    background-color:   var(--color);
+    border-color: white;
+    color:        white;
+
+    font-size:       52px;
+    font-family:     "JetBrains Mono", monospace;
+    text-transform:  uppercase;
+    width:           64px;
+    height:          64px;
+    margin:          4px;
+    display:         inline-flex;
+    justify-content: center;
+    align-items:     center;
+    user-select: none;
+}
+
+.wordle-letter.incorrect {
+    --color: #888;
+}
+
+.wordle-letter.misplaced {
+    --color: #eb0;
+}
+
+.wordle-letter.correct {
+    --color: #3b5;
+}

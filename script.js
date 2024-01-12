@@ -6,13 +6,16 @@ function changeScreenTo(screen) {
 
 // Load words
 
-for (let wordLength = 4; wordLength <= 12; wordLength++) {
+await Promise.all([4, 5, 6, 7, 8, 9, 10, 11, 12].map(wordLength => (async resolve => {
     console.log(`Loading ${wordLength} letter words`)
     let allWords = await (await fetch(`res/dictionary/allWords${wordLength}.txt`)).text();
     Wordle.updateDictionary(allWords.split(/\s+/g));
     let guessableWords = await (await fetch(`res/dictionary/commonWords${wordLength}.txt`)).text();
     Wordle.loadWords(wordLength, guessableWords.split(/\s+/g));
-}
+})()));
+
+document.getElementById('loading-screen').classList.add('hidden');
+setTimeout(() => document.getElementById('loading-screen').remove(), 1000)
 
 console.log("Loaded " + Wordle.dictionary.size + " words into dictionary");
 

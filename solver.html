@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="ui.css" type="text/css">
+    <link rel="stylesheet" href="wordle.css" type="text/css">
+    <link rel="stylesheet" href="solver.css" type="text/css">
+</head>
+<body>
+<div id="solver-container">
+    <div id="input">
+        <div id="previous-guesses">
+            <label>
+                <input type="text" id="guess-input" maxlength="24">
+                <script>
+                    (function (el) {
+                        el.onkeydown = e => {
+                            if (!e.key.match(/^[A-Za-z?\-]$/)) return;
+
+
+                        }
+                    })(document.getElementById('guess-input'))
+                </script>
+            </label>
+            <div id="previous-guesses-display">
+                <div class="wordle-result">
+                    <span class="wordle-letter incorrect">c</span>
+                    <span class="wordle-letter misplaced">r</span>
+                    <span class="wordle-letter incorrect">u</span>
+                    <span class="wordle-letter misplaced">s</span>
+                    <span class="wordle-letter incorrect">h</span>
+                    <span class="wordle-letter misplaced">i</span>
+                    <span class="wordle-letter incorrect">n</span>
+                    <span class="wordle-letter incorrect">g</span>
+                    <button>-</button>
+                </div>
+                <div class="wordle-result">
+                    <span class="wordle-letter incorrect">t</span>
+                    <span class="wordle-letter misplaced">o</span>
+                    <span class="wordle-letter incorrect">e</span>
+                    <span class="wordle-letter misplaced">n</span>
+                    <span class="wordle-letter incorrect">a</span>
+                    <span class="wordle-letter misplaced">i</span>
+                    <span class="wordle-letter incorrect">l</span>
+                    <span class="wordle-letter misplaced">s</span>
+                    <button>-</button>
+                </div>
+                <div class="wordle-result">
+                    <span class="wordle-letter correct">s</span>
+                    <span class="wordle-letter correct">e</span>
+                    <span class="wordle-letter correct">r</span>
+                    <span class="wordle-letter correct">e</span>
+                    <span class="wordle-letter correct">n</span>
+                    <span class="wordle-letter incorrect">i</span>
+                    <span class="wordle-letter incorrect">t</span>
+                    <span class="wordle-letter incorrect">y</span>
+                    <button>-</button>
+                </div>
+            </div>
+        </div>
+        <div id="letter-queries-container">
+            <h3>Constraints:
+                <button id="add-constraint-button">+</button>
+            </h3>
+            <div id="letter-queries">
+                <div class="letter-query">
+                    <label>count('<input type="text" value="e" maxlength="1" minlength="1">')</label><span tabindex="0">&ge;</span><label><input
+                        type="number" min="0" max="8" value="1" size="1"></label>
+                    <button>-</button>
+                </div>
+                <div class="letter-query">
+                    <label>count('<input type="text" value="t" maxlength="1" minlength="1">')</label><span tabindex="0">=</span><label><input
+                        type="number" min="0" max="8" value="1" size="0"></label>
+                    <button>-</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="output">
+        <h3>Matching words:</h3>
+        <div id="output-words">
+            absolute academic accident accurate activist activity actually
+            addition adequate advanced advocate aircraft alliance although
+            analysis announce anything anywhere apparent approach approval
+            argument artistic athletic attitude audience bathroom behavior
+            birthday boundary building business campaign capacity category
+            ceremony champion changing civilian clinical clothing collapse
+            commonly complain complete computer conclude concrete conflict
+            confront consider constant consumer continue contract contrast
+            convince coverage creation creative creature criminal criteria
+            critical cultural customer darkness daughter decision decrease
+            delivery describe designer detailed dialogue directly director
+            disagree disaster discover disorder distance distinct district
+            division document dominant dominate dramatic earnings economic
+            educator electric emission emphasis employee employer engineer
+            enormous entirely entrance estimate evaluate everyday everyone
+            evidence exchange exciting exercise existing exposure external
+            facility familiar favorite fighting football frequent friendly
+            function generate graduate greatest headline heritage historic
+            hospital identify identity incident increase indicate industry
+            innocent instance interest internal internet investor involved
+            judgment language learning lifetime literary location magazine
+            maintain majority marriage material measures military minority
+            moderate moreover mortgage mountain movement multiple musician
+            national negative neighbor normally northern numerous observer
+            occasion official operator opponent opposite ordinary organize
+            original overcome overlook painting perceive personal persuade
+            physical planning platform pleasure politics portrait position
+            positive possible possibly powerful practice pregnant presence
+            preserve pressure previous priority prisoner probably producer
+            progress properly property proposal proposed prospect provider
+            province publicly purchase purposes question reaction recently
+            recovery regional register regulate relation relative relevant
+            religion remember reporter research resemble resident resource
+            response romantic sanction scenario schedule scrabble security
+            sentence separate sequence shooting shopping shoulder slightly
+            software solution somebody somewhat southern specific spending
+            standard standing starting straight stranger strategy strength
+            strongly struggle suddenly supposed surprise surround survival
+            survivor teaching teaspoon teenager tendency terrible thinking
+            thousand threaten together tomorrow training transfer ultimate
+            universe unlikely vacation valuable variable whatever whenever
+            withdraw workshop yourself
+        </div>
+    </div>
+</div>
+</body>
+</html>

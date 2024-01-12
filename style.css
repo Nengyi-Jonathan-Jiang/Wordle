@@ -1,40 +1,8 @@
 /******* Base ********/
 
-@font-face {
-    font-family: Nunito;
-    src:         url("res/font/Nunito/Nunito-VariableFont_wght.ttf");
-}
-
-@font-face {
-    font-family: "JetBrains Mono";
-    src:         url("res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf"),
-                 url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
-                 url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff')
-;
-}
-
-* {
-    box-sizing: border-box;
-    font:       inherit;
-    background: transparent;
-    color:      inherit;
-    outline:    none;
-    border:     0;
-}
-
 body {
-    margin:          0;
-    position:        absolute;
-    top:             0;
-    left:            0;
-    right:           0;
-    bottom:          0;
     background-size: cover;
     background:      url("res/TEMP_bg.png") center;
-    overflow:        hidden;
-
-    font-family:     Nunito, Arial, sans-serif;
-    font-size:       20px;
 }
 
 h1 {
@@ -150,7 +118,7 @@ div#title button#play-button > span#play-icon {
 
 #wordle-input, #wordle-input-background, #end-game-container {
     position:    absolute;
-    border-top:  3px solid black;
+    border-top:  3px solid #b5b5b5;
     height:      76px;
     bottom:      0;
     padding-top: 4px;
@@ -194,25 +162,6 @@ div#title button#play-button > span#play-icon {
     transform: scale(1.1);
 }
 
-.wordle-letter {
-    --color:      #000;
-    background:   var(--color);
-    border-color: white;
-    color:        white;
-}
-
-.wordle-letter.incorrect {
-    --color: #888;
-}
-
-.wordle-letter.misplaced {
-    --color: #eb0;
-}
-
-.wordle-letter.correct {
-    --color: #3b5;
-}
-
 #wordle-input > span[data-letter]::before {
     content: attr(data-letter);
 }
@@ -226,8 +175,8 @@ div#title button#play-button > span#play-icon {
     animation:          come-up .5s ease-out;
     --animation-amount: 0;
 
-    margin:             calc(4px - 52px * var(--wordle-letter-animation-amount)) 4px;
-    transform:          translateY(calc(64px * var(--wordle-letter-animation-amount)));
+    margin:             calc(4px - 52px * var(--wordle-letter-animation-amount)) 4px !important;
+    transform:          translateY(calc(64px * var(--wordle-letter-animation-amount))) !important;
 }
 
 @keyframes come-up {
@@ -380,3 +329,43 @@ button#restart-game-button {
     position:       relative;
 }
 
+
+/** Loading screen **/
+
+#loading-screen {
+    z-index: 1;
+    background-color: #08f;
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 20px;
+    font-family: "JetBrains Mono", monospace;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s;
+    opacity: 1;
+}
+#loading-screen.hidden {
+    opacity: 0;
+}
+#loading-text {
+    position:absolute;
+    bottom: 16px;
+}
+#loading-spinner {
+    display: block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 8px solid;
+    border-color: #fff #0000 #fff #0000;
+    background-blend-mode: lighten;
+    animation: rotate-animation 1s infinite;
+}
+@keyframes rotate-animation {
+    0% { transform: rotate(0) }
+    100% { transform: rotate(180deg) }
+}
