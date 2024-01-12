@@ -73,7 +73,6 @@ const keyboard = (function populateKeyboard(container) {
 
 function startGame(wordLength, allowAnyWord) {
     targetWord = Wordle.getRandomWord(wordLength);
-    console.log(targetWord);
     let wordleInput = document.getElementById('wordle-input');
     let wordleInputBackground = document.getElementById('wordle-input-background');
     let history = document.getElementById('history')
