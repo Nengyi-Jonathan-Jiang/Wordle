@@ -123,14 +123,13 @@ div#title button#play-button>span#play-icon {
     flex-direction: column;
     align-items: center;
     justify-content: end;
-    width: 100%;
 }
 
 #history {
     margin-bottom: 196px;
 }
 
-#wordle-input, #wordle-input-background {
+#wordle-input, #wordle-input-background, #end-game-container {
     position: absolute;
     border-top: 3px solid black;
     height: 76px;
@@ -209,16 +208,16 @@ div#title button#play-button>span#play-icon {
     content: '-'; color: transparent;
 }
 #wordle-input-background>span.hidden {
-    display: none;
+    opacity: 0;
 }
 #wordle-input-background>span:not(.hidden) {
-    display: inline-flex;
+    opacity: 1;
     background-color: black;
     border: 3px solid #cdcdcd;
-    animation: wordle-input-background-letter-animation .5s ease-in;
+    animation: rotate-appear .5s ease-in;
 }
 
-@keyframes wordle-input-background-letter-animation {
+@keyframes rotate-appear {
     0% { transform: scale(0) rotate(0) }
     50% { transform: scale(0) rotate(0) }
     100% { transform: scale(1) rotate(180deg) }
@@ -263,4 +262,55 @@ div#title button#play-button>span#play-icon {
     border: 3px solid #888;
     font-weight: bold;
     color: #888;
+}
+#wordle-keyboard span.wordle-keyboard-letter.incorrect {
+    border-color: #444;
+    background-color: #444;
+    color: white;
+}
+#wordle-keyboard span.wordle-keyboard-letter.misplaced {
+    border-color: #eb0;
+    background-color: #eb0;
+    color: white;
+}
+#wordle-keyboard span.wordle-keyboard-letter.correct {
+    border-color: #3b5;
+    background-color: #3b5;
+    color: white;
+}
+
+#wordle-container:not([data-finished])>#end-game-container {
+    display: none;
+}
+
+#wordle-container:not([data-finished])>#end-game-container>#restart-game-button {
+    display: none;
+}
+#wordle-container[data-finished]>#end-game-container>#restart-game-button {
+    display: inline-block;
+    animation: rotate-appear 1s;
+    transform: rotate(180deg);
+    transition: transform .2s;
+}
+#wordle-container[data-finished]>#end-game-container>#restart-game-button:hover {
+    transform: rotate(180deg) scale(1.2);
+}
+
+#end-game-container {
+    width: 100%;
+    text-align: center;
+}
+
+button#restart-game-button {
+    background-image: url(res/restart.png);
+    width: 64px;
+    height: 64px;
+    background-size: contain;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+#wordle-container[data-finished] div#wordle-input,
+#wordle-container[data-finished] div#wordle-input-background {
+    display: none;
 }

@@ -19,8 +19,10 @@ console.log("Loaded " + Wordle.dictionary.size + " words into dictionary");
 /** @type {string | null} */
 let targetWord = null;
 /** @type {(key:string) => boolean} */
-let onKeyPress = _ => {
-};
+let onKeyPress = _ => {};
+/** @type {()=>any} */
+let onRestart = () => {};
+document.getElementById('restart-game-button').onclick = () => onRestart()
 window.onkeydown = e => {
     if (!e.ctrlKey && !e.altKey && !e.metaKey) {
         if (onKeyPress(e.key.toLowerCase())) {
@@ -71,13 +73,18 @@ const keyboard = (function populateKeyboard(container) {
 
 function startGame(wordLength, allowAnyWord) {
     targetWord = Wordle.getRandomWord(wordLength);
+    console.log(targetWord);
     let wordleInput = document.getElementById('wordle-input');
     let wordleInputBackground = document.getElementById('wordle-input-background');
     let history = document.getElementById('history')
 
+    delete document.getElementById('wordle-container').dataset.finished;
+
     while (wordleInputBackground.firstChild) wordleInputBackground.firstChild.remove();
     while (wordleInput.firstChild) wordleInput.firstChild.remove();
     while (history.firstChild) history.firstChild.remove();
+
+    history.style.setProperty('width', `${72 * wordLength}px`);
 
     [...keyboard.values()].forEach(i => i.className = 'wordle-keyboard-letter');
 
@@ -104,7 +111,7 @@ function startGame(wordLength, allowAnyWord) {
                 let result = WordleResult.generate(wordLength, targetWord, guess);
 
                 for(let i = 0; i < wordLength; i++){
-                    keyboard.get(guess[i]).classList.add(result.results[i] === WordleResult.INCORRECT ? 'incorrect' : 'correct')
+                    keyboard.get(guess[i]).classList.add(`${result.results[i]}`)
                 }
 
                 addToHistory(result);
@@ -114,9 +121,10 @@ function startGame(wordLength, allowAnyWord) {
                     document.querySelectorAll('#wordle-input-background>span').forEach(i => {
                         i.classList.add('hidden');
                     })
-                    setTimeout(() => {
-                        startGame(wordLength, allowAnyWord)
-                    }, 2000)
+                    document.getElementById('wordle-container').dataset.finished = '';
+                    onRestart = () => {
+                        startGame(wordLength, allowAnyWord);
+                    }
                 }
             }
             return true;
