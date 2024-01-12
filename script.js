@@ -114,7 +114,6 @@ function startGame(wordLength, allowAnyWord, guessAnyWord) {
 
     targetWord = guessAnyWord ? Wordle.getRandomObscureWord(wordLength) : Wordle.getRandomCommonWord(wordLength);
 
-    console.log(`started new wordle ${wordLength} ${allowAnyWord} ${guessAnyWord} ${targetWord}`)
     previousGuesses = [];
     let wordleInput = document.getElementById('wordle-input');
     let wordleInputBackground = document.getElementById('wordle-input-background');
