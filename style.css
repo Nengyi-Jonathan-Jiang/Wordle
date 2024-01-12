@@ -2,13 +2,13 @@
 
 body {
     background-size: cover;
-    background:      url("res/TEMP_bg.png") center;
+    background: url("res/TEMP_bg.png") center;
 }
 
 h1 {
-    font-size:     64px;
+    font-size: 64px;
     margin-bottom: 0;
-    font-weight:   bold;
+    font-weight: bold;
 }
 
 p {
@@ -18,37 +18,37 @@ p {
 /****** Screens ******/
 
 @property --active-screen {
-    syntax:        "<number>";
-    inherits:      true;
+    syntax: "<number>";
+    inherits: true;
     initial-value: 0;
 }
 
 div#screens-container {
-    position:         relative;
-    width:            100vw;
-    height:           100vh;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
 
     transform-origin: 50vw -50vw;
-    transform:        rotate(calc(var(--active-screen) * 90deg));
-    transition:       transform .75s;
+    transform: rotate(calc(var(--active-screen) * 90deg));
+    transition: transform .75s;
 }
 
 div#screens-container > div {
-    width:            100vw;
-    height:           100vh;
-    position:         absolute;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
 
-    --screen-number:  0;
+    --screen-number: 0;
 
-    display:          flex;
-    flex-direction:   column;
-    align-items:      center;
-    justify-content:  center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     transform-origin: 50vw -50vw;
-    transform:        rotate(calc(var(--screen-number) * -90deg));
+    transform: rotate(calc(var(--screen-number) * -90deg));
 
-    padding:          0 max(10px, calc(50vw - 312px));
+    padding: 0 max(10px, calc(50vw - 312px));
 }
 
 div#screens-container > div:nth-child(1) {
@@ -66,20 +66,20 @@ div#screens-container > div:nth-child(3) {
 /******* Title *******/
 
 div#title p {
-    margin-top:    -4px;
+    margin-top: -4px;
     margin-bottom: 32px;
-    font-size:     16px;
+    font-size: 16px;
 }
 
 div#title button#play-button {
-    border:           0;
-    width:            fit-content;
-    padding:          5px 15px;
+    border: 0;
+    width: fit-content;
+    padding: 5px 15px;
     background-color: #08f;
-    border-radius:    35px;
-    color:            white;
-    transition:       transform .2s;
-    transform:        scale(1);
+    border-radius: 35px;
+    color: white;
+    transition: transform .2s;
+    transform: scale(1);
 }
 
 div#title button#play-button:hover {
@@ -93,19 +93,19 @@ div#title button#play-button > span#play-icon {
 /****** Wordle *****/
 
 @property --wordle-letter-animation-amount {
-    syntax:        "<number>";
+    syntax: "<number>";
     initial-value: 0;
-    inherits:      false;
+    inherits: false;
 }
 
 #wordle-container {
-    position:       relative;
-    font-size:      0;
-    max-height:     calc(100vh - 128px);
-    display:        flex;
+    position: relative;
+    font-size: 0;
+    max-height: calc(100vh - 128px);
+    display: flex;
     flex-direction: column-reverse;
-    align-items:    center;
-    overflow:       scroll;
+    align-items: center;
+    overflow: scroll;
 }
 
 #wordle-container::-webkit-scrollbar {
@@ -117,36 +117,37 @@ div#title button#play-button > span#play-icon {
 }
 
 #wordle-input, #wordle-input-background, #end-game-container {
-    position:    absolute;
-    border-top:  3px solid #b5b5b5;
-    height:      76px;
-    bottom:      0;
+    position: absolute;
+    border-top: 3px solid #b5b5b5;
+    height: 76px;
+    bottom: 0;
     padding-top: 4px;
 }
 
 #wordle-input {
-    z-index:         1;
+    z-index: 1;
     backdrop-filter: grayscale(1) invert() brightness(360%);
 }
 
 #wordle-input-background {
-    z-index:          -1;
-    backdrop-filter:  brightness(28%);
+    z-index: -1;
+    backdrop-filter: brightness(28%);
     border-top-color: transparent;
 }
 
 .wordle-letter, #wordle-input > span, #wordle-input-background > span {
-    font-size:       52px;
-    font-family:     "JetBrains Mono", monospace;
-    text-transform:  uppercase;
-    width:           64px;
-    height:          64px;
-    margin:          4px;
-    display:         inline-flex;
-    border:          3px solid black;
+    font-size: 52px;
+    font-family: "JetBrains Mono", monospace;
+    text-transform: uppercase;
+    width: 64px;
+    height: 64px;
+    margin: 4px;
+    display: inline-flex;
+    border: 3px solid black;
     justify-content: center;
-    align-items:     center;
-    background:      white;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
 }
 
 #wordle-input > span:not([data-letter]) {
@@ -155,7 +156,7 @@ div#title button#play-button > span#play-icon {
 
 #wordle-input > span {
     transition: transform .2s;
-    transform:  scale(1)
+    transform: scale(1)
 }
 
 #wordle-input > span:hover {
@@ -168,15 +169,15 @@ div#title button#play-button > span#play-icon {
 
 #wordle-input > span:not([data-letter])::before {
     content: "-";
-    color:   transparent;
+    color: transparent;
 }
 
 .wordle-letter {
-    animation:          come-up .5s ease-out;
+    animation: come-up .5s ease-out;
     --animation-amount: 0;
 
-    margin:             calc(4px - 52px * var(--wordle-letter-animation-amount)) 4px !important;
-    transform:          translateY(calc(64px * var(--wordle-letter-animation-amount))) !important;
+    margin: calc(4px - 52px * var(--wordle-letter-animation-amount)) 4px !important;
+    transform: translateY(calc(64px * var(--wordle-letter-animation-amount))) !important;
 }
 
 @keyframes come-up {
@@ -190,7 +191,7 @@ div#title button#play-button > span#play-icon {
 
 #wordle-input-background > span::after {
     content: "-";
-    color:   transparent;
+    color: transparent;
 }
 
 #wordle-input-background > span.hidden {
@@ -198,10 +199,10 @@ div#title button#play-button > span#play-icon {
 }
 
 #wordle-input-background > span:not(.hidden) {
-    opacity:          1;
+    opacity: 1;
     background-color: black;
-    border:           3px solid #cdcdcd;
-    animation:        rotate-appear .5s ease-in;
+    border: 3px solid #cdcdcd;
+    animation: rotate-appear .5s ease-in;
 }
 
 @keyframes rotate-appear {
@@ -218,17 +219,17 @@ div#title button#play-button > span#play-icon {
 
 .corner {
     position: absolute !important;
-    top:      0 !important;
-    left:     0 !important;
+    top: 0 !important;
+    left: 0 !important;
 }
 
 .back-button, #give-up-button {
-    background:      transparent url("res/back.svg");
+    background: transparent url("res/back.svg");
     background-size: contain !important;
-    display:         inline-block;
-    width:           32px;
-    height:          32px;
-    margin:          12px 0 0 16px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin: 12px 0 0 16px;
     border-radius: 0;
 }
 
@@ -238,29 +239,29 @@ div#title button#play-button > span#play-icon {
 
 
 #wordle-keyboard {
-    position:       relative;
-    display:        flex;
+    position: relative;
+    display: flex;
     flex-direction: column;
-    align-items:    center;
-    white-space:    nowrap;
-    margin-top:     8px;
+    align-items: center;
+    white-space: nowrap;
+    margin-top: 8px;
 }
 
 #wordle-keyboard .wordle-keyboard-letter {
-    font-size:       18px;
-    display:         inline-flex;
-    background:      white;
-    padding:         0;
-    margin:          4px;
-    width:           40px;
-    height:          28px;
-    align-items:     center;
+    font-size: 18px;
+    display: inline-flex;
+    background: white;
+    padding: 0;
+    margin: 4px;
+    width: 40px;
+    height: 28px;
+    align-items: center;
     justify-content: center;
-    font-family:     "JetBrains Mono", monospace;
-    border-radius:   5px;
-    border:          2px solid #888;
-    font-weight:     bold;
-    color:           #888;
+    font-family: "JetBrains Mono", monospace;
+    border-radius: 5px;
+    border: 2px solid #888;
+    font-weight: bold;
+    color: #888;
 }
 
 #wordle-keyboard .wordle-keyboard-letter:hover {
@@ -268,21 +269,21 @@ div#title button#play-button > span#play-icon {
 }
 
 #wordle-keyboard .wordle-keyboard-letter.incorrect {
-    border-color:     #444;
+    border-color: #444;
     background-color: #444;
-    color:            white;
+    color: white;
 }
 
 #wordle-keyboard .wordle-keyboard-letter.misplaced {
-    border-color:     #eb0;
+    border-color: #eb0;
     background-color: #eb0;
-    color:            white;
+    color: white;
 }
 
 #wordle-keyboard .wordle-keyboard-letter.correct {
-    border-color:     #3b5;
+    border-color: #3b5;
     background-color: #3b5;
-    color:            white;
+    color: white;
 }
 
 #wordle-container:not([data-finished]) #end-game-container {
@@ -294,9 +295,9 @@ div#title button#play-button > span#play-icon {
 }
 
 #wordle-container[data-finished] #end-game-container > #restart-game-button {
-    display:    inline-block;
-    animation:  rotate-appear 1s;
-    transform:  rotate(180deg);
+    display: inline-block;
+    animation: rotate-appear 1s;
+    transform: rotate(180deg);
     transition: transform .2s;
 }
 
@@ -305,17 +306,17 @@ div#title button#play-button > span#play-icon {
 }
 
 #end-game-container {
-    width:      100%;
+    width: 100%;
     text-align: center;
 }
 
 button#restart-game-button {
     background-image: url(res/restart.png);
-    width:            64px;
-    height:           64px;
-    background-size:  contain;
+    width: 64px;
+    height: 64px;
+    background-size: contain;
     background-color: transparent;
-    border-radius:    0;
+    border-radius: 0;
 }
 
 #wordle-container[data-finished] div#wordle-input,
@@ -324,9 +325,9 @@ button#restart-game-button {
 }
 
 #wordle-scroller {
-    display:        flex;
+    display: flex;
     flex-direction: column;
-    position:       relative;
+    position: relative;
 }
 
 
@@ -348,13 +349,16 @@ button#restart-game-button {
     transition: opacity 1s;
     opacity: 1;
 }
+
 #loading-screen.hidden {
     opacity: 0;
 }
+
 #loading-text {
-    position:absolute;
+    position: absolute;
     bottom: 16px;
 }
+
 #loading-spinner {
     display: block;
     width: 56px;
@@ -365,7 +369,12 @@ button#restart-game-button {
     background-blend-mode: lighten;
     animation: rotate-animation 1s infinite;
 }
+
 @keyframes rotate-animation {
-    0% { transform: rotate(0) }
-    100% { transform: rotate(180deg) }
+    0% {
+        transform: rotate(0)
+    }
+    100% {
+        transform: rotate(180deg)
+    }
 }

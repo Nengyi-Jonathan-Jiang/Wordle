@@ -26,6 +26,7 @@
     justify-content: center;
     align-items:     center;
     user-select: none;
+    border-radius: 12px;
 }
 
 .wordle-letter.incorrect {
@@ -38,4 +39,8 @@
 
 .wordle-letter.correct {
     --color: #3b5;
+}
+
+.wordle-letter.surrender {
+    --color: #0af;
 }

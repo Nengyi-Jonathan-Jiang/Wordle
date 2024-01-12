@@ -33,6 +33,9 @@ document.getElementById('give-up-button').onclick = () => {
     for(let i = 0; i < targetWord.length; i++) onKeyPress('backspace');
     for(let char of targetWord) onKeyPress(char);
     onKeyPress('enter');
+    [...[...document.querySelectorAll('.wordle-result')].pop().children].forEach(i => {
+        i.classList.add('surrender');
+    });
 }
 
 window.onkeydown = e => {
