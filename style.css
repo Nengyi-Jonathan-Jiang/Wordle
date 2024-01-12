@@ -7,9 +7,10 @@
 
 @font-face {
     font-family: "JetBrains Mono";
-    src:         url("res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf") format('ttf'),
-                 url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Bold-Italic.woff2') format('woff2'),
-                 url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Bold-Italic.woff') format('woff');
+    src:         url("res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf"),
+                 url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono.woff2') format('woff2'),
+                 url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono.woff') format('woff')
+;
 }
 
 * {
