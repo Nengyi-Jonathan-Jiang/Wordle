@@ -24,7 +24,14 @@ let previousGuesses = [];
 let onKeyPress = _ => {};
 /** @type {()=>any} */
 let onRestart = () => {};
+
 document.getElementById('restart-game-button').onclick = () => onRestart()
+document.getElementById('give-up-button').onclick = () => {
+    for(let i = 0; i < targetWord.length; i++) onKeyPress('backspace');
+    for(let char of targetWord) onKeyPress(char);
+    onKeyPress('enter');
+}
+
 window.onkeydown = e => {
     if (!e.ctrlKey && !e.altKey && !e.metaKey) {
         if (onKeyPress(e.key.toLowerCase())) {
@@ -101,6 +108,10 @@ const keyboard = (function populateKeyboard(container) {
  * @param {boolean} guessAnyWord
  */
 function startGame(wordLength, allowAnyWord, guessAnyWord) {
+    onRestart = () => {
+        startGame(wordLength, allowAnyWord, guessAnyWord);
+    }
+
     targetWord = guessAnyWord ? Wordle.getRandomObscureWord(wordLength) : Wordle.getRandomCommonWord(wordLength);
 
     console.log(`started new wordle ${wordLength} ${allowAnyWord} ${guessAnyWord} ${targetWord}`)
@@ -155,9 +166,6 @@ function startGame(wordLength, allowAnyWord, guessAnyWord) {
                         i.classList.add('hidden');
                     })
                     document.getElementById('wordle-container').dataset.finished = '';
-                    onRestart = () => {
-                        startGame(wordLength, allowAnyWord, guessAnyWord);
-                    }
                 }
             }
             return true;

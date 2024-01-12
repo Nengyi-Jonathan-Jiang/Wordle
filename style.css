@@ -2,42 +2,42 @@
 
 @font-face {
     font-family: Nunito;
-    src: url("res/font/Nunito/Nunito-VariableFont_wght.ttf");
+    src:         url("res/font/Nunito/Nunito-VariableFont_wght.ttf");
 }
 
 @font-face {
-    font-family: 'JetBrains Mono';
-    src: url("res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf");
+    font-family: "JetBrains Mono";
+    src:         url("res/font/Jetbrains_Mono/JetBrainsMono-VariableFont_wght.ttf");
 }
 
 * {
     box-sizing: border-box;
-    font: inherit;
+    font:       inherit;
     background: transparent;
-    color: inherit;
-    outline: none;
-    border: 0;
+    color:      inherit;
+    outline:    none;
+    border:     0;
 }
 
 body {
-    margin: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    margin:          0;
+    position:        absolute;
+    top:             0;
+    left:            0;
+    right:           0;
+    bottom:          0;
     background-size: cover;
-    background: url("res/TEMP_bg.png") center;
-    overflow: hidden;
+    background:      url("res/TEMP_bg.png") center;
+    overflow:        hidden;
 
-    font-family: Nunito, Arial, sans-serif;
-    font-size: 20px;
+    font-family:     Nunito, Arial, sans-serif;
+    font-size:       20px;
 }
 
 h1 {
-    font-size: 64px;
+    font-size:     64px;
     margin-bottom: 0;
-    font-weight: bold;
+    font-weight:   bold;
 }
 
 p {
@@ -47,82 +47,94 @@ p {
 /****** Screens ******/
 
 @property --active-screen {
-    syntax: "<number>";
-    inherits: true;
+    syntax:        "<number>";
+    inherits:      true;
     initial-value: 0;
 }
 
 div#screens-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+    position:         relative;
+    width:            100vw;
+    height:           100vh;
 
     transform-origin: 50vw -50vw;
-    transform: rotate(calc(var(--active-screen) * 90deg));
-    transition: transform .75s;
+    transform:        rotate(calc(var(--active-screen) * 90deg));
+    transition:       transform .75s;
 }
 
-div#screens-container>div {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
+div#screens-container > div {
+    width:            100vw;
+    height:           100vh;
+    position:         absolute;
 
-    --screen-number: 0;
+    --screen-number:  0;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display:          flex;
+    flex-direction:   column;
+    align-items:      center;
+    justify-content:  center;
 
     transform-origin: 50vw -50vw;
-    transform: rotate(calc(var(--screen-number) * -90deg));
+    transform:        rotate(calc(var(--screen-number) * -90deg));
 
-    padding: 0 max(10px, calc(50vw - 312px));
+    padding:          0 max(10px, calc(50vw - 312px));
 }
-div#screens-container>div:nth-child(1) { --screen-number: 0 }
-div#screens-container>div:nth-child(2) { --screen-number: 1 }
-div#screens-container>div:nth-child(3) { --screen-number: 2 }
+
+div#screens-container > div:nth-child(1) {
+    --screen-number: 0
+}
+
+div#screens-container > div:nth-child(2) {
+    --screen-number: 1
+}
+
+div#screens-container > div:nth-child(3) {
+    --screen-number: 2
+}
 
 /******* Title *******/
 
 div#title p {
-    margin-top: -4px;
+    margin-top:    -4px;
     margin-bottom: 32px;
-    font-size: 16px;
+    font-size:     16px;
 }
+
 div#title button#play-button {
-    border: 0;
-    width: fit-content;
-    padding: 5px 15px;
+    border:           0;
+    width:            fit-content;
+    padding:          5px 15px;
     background-color: #08f;
-    border-radius: 35px;
-    color: white;
-    transition: transform .2s;
-    transform: scale(1);
+    border-radius:    35px;
+    color:            white;
+    transition:       transform .2s;
+    transform:        scale(1);
 }
+
 div#title button#play-button:hover {
     transform: scale(1.1);
 }
-div#title button#play-button>span#play-icon {
+
+div#title button#play-button > span#play-icon {
     font-family: "JetBrains Mono", sans-serif;
 }
 
 /****** Wordle *****/
 
 @property --wordle-letter-animation-amount {
-    syntax: '<number>';
+    syntax:        "<number>";
     initial-value: 0;
-    inherits: false;
+    inherits:      false;
 }
 
 #wordle-container {
-    position: relative;
-    font-size: 0;
-    max-height: calc(100vh - 128px);
-    display: flex;
+    position:       relative;
+    font-size:      0;
+    max-height:     calc(100vh - 128px);
+    display:        flex;
     flex-direction: column-reverse;
-    align-items: center;
-    overflow: scroll;
+    align-items:    center;
+    overflow:       scroll;
 }
 
 #wordle-container::-webkit-scrollbar {
@@ -134,148 +146,169 @@ div#title button#play-button>span#play-icon {
 }
 
 #wordle-input, #wordle-input-background, #end-game-container {
-    position: absolute;
-    border-top: 3px solid black;
-    height: 76px;
-    bottom: 0;
+    position:    absolute;
+    border-top:  3px solid black;
+    height:      76px;
+    bottom:      0;
     padding-top: 4px;
 }
 
 #wordle-input {
-    z-index: 1;
+    z-index:         1;
     backdrop-filter: grayscale(1) invert() brightness(360%);
 }
 
 #wordle-input-background {
-    z-index: -1;
-    backdrop-filter: brightness(28%);
+    z-index:          -1;
+    backdrop-filter:  brightness(28%);
     border-top-color: transparent;
 }
 
-.wordle-letter, #wordle-input>span, #wordle-input-background>span {
-    font-size: 52px;
-    font-family: 'JetBrains Mono', monospace;
-    text-transform: uppercase;
-    width: 64px;
-    height: 64px;
-    margin: 4px;
-    display: inline-flex;
-    border: 3px solid black;
+.wordle-letter, #wordle-input > span, #wordle-input-background > span {
+    font-size:       52px;
+    font-family:     "JetBrains Mono", monospace;
+    text-transform:  uppercase;
+    width:           64px;
+    height:          64px;
+    margin:          4px;
+    display:         inline-flex;
+    border:          3px solid black;
     justify-content: center;
-    align-items: center;
-    background: white;
+    align-items:     center;
+    background:      white;
 }
 
-#wordle-input>span:not([data-letter]){
+#wordle-input > span:not([data-letter]) {
     opacity: 0;
 }
 
-#wordle-input>span {
+#wordle-input > span {
     transition: transform .2s;
-    transform: scale(1)
+    transform:  scale(1)
 }
 
-#wordle-input>span:hover {
+#wordle-input > span:hover {
     transform: scale(1.1);
 }
 
 .wordle-letter {
-    --color: #000;
-    background: var(--color);
+    --color:      #000;
+    background:   var(--color);
     border-color: white;
-    color: white;
+    color:        white;
 }
 
 .wordle-letter.incorrect {
     --color: #888;
 }
+
 .wordle-letter.misplaced {
     --color: #eb0;
 }
+
 .wordle-letter.correct {
     --color: #3b5;
 }
 
-#wordle-input>span[data-letter]::before {
+#wordle-input > span[data-letter]::before {
     content: attr(data-letter);
 }
 
-#wordle-input>span:not([data-letter])::before {
-    content: '-'; color: transparent;
+#wordle-input > span:not([data-letter])::before {
+    content: "-";
+    color:   transparent;
 }
 
 .wordle-letter {
-    animation: come-up .5s ease-out;
+    animation:          come-up .5s ease-out;
     --animation-amount: 0;
 
-    margin: calc(4px - 52px * var(--wordle-letter-animation-amount)) 4px;
-    transform: translateY(calc(64px * var(--wordle-letter-animation-amount)));
+    margin:             calc(4px - 52px * var(--wordle-letter-animation-amount)) 4px;
+    transform:          translateY(calc(64px * var(--wordle-letter-animation-amount)));
 }
 
 @keyframes come-up {
-    0% { --wordle-letter-animation-amount: 1 }
-    100% { --wordle-letter-animation-amount: 0 }
+    0% {
+        --wordle-letter-animation-amount: 1
+    }
+    100% {
+        --wordle-letter-animation-amount: 0
+    }
 }
 
-#wordle-input-background>span::after {
-    content: '-'; color: transparent;
+#wordle-input-background > span::after {
+    content: "-";
+    color:   transparent;
 }
-#wordle-input-background>span.hidden {
+
+#wordle-input-background > span.hidden {
     opacity: 0;
 }
-#wordle-input-background>span:not(.hidden) {
-    opacity: 1;
+
+#wordle-input-background > span:not(.hidden) {
+    opacity:          1;
     background-color: black;
-    border: 3px solid #cdcdcd;
-    animation: rotate-appear .5s ease-in;
+    border:           3px solid #cdcdcd;
+    animation:        rotate-appear .5s ease-in;
 }
 
 @keyframes rotate-appear {
-    0% { transform: scale(0) rotate(0) }
-    50% { transform: scale(0) rotate(0) }
-    100% { transform: scale(1) rotate(180deg) }
+    0% {
+        transform: scale(0) rotate(0)
+    }
+    50% {
+        transform: scale(0) rotate(0)
+    }
+    100% {
+        transform: scale(1) rotate(180deg)
+    }
 }
 
 .corner {
     position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    top:      0 !important;
+    left:     0 !important;
 }
 
-.back-button {
-    background-color: transparent;
-    background-image: url('res/back.svg');
-    background-size: contain;
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    margin: 12px 16px;
+.back-button, #give-up-button {
+    background:      transparent url("res/back.svg");
+    background-size: contain !important;
+    display:         inline-block;
+    width:           32px;
+    height:          32px;
+    margin:          12px 0 0 16px;
+    border-radius: 0;
 }
+
+#give-up-button {
+    background: transparent url("res/surrender.svg");
+}
+
 
 #wordle-keyboard {
-    position: relative;
-    display: flex;
+    position:       relative;
+    display:        flex;
     flex-direction: column;
-    align-items: center;
-    white-space: nowrap;
-    margin-top: 8px;
+    align-items:    center;
+    white-space:    nowrap;
+    margin-top:     8px;
 }
 
 #wordle-keyboard .wordle-keyboard-letter {
-    font-size: 18px;
-    display: inline-flex;
-    background: white;
-    padding: 0;
-    margin: 4px;
-    width: 28px;
-    height: 28px;
-    align-items: center;
+    font-size:       18px;
+    display:         inline-flex;
+    background:      white;
+    padding:         0;
+    margin:          4px;
+    width:           28px;
+    height:          28px;
+    align-items:     center;
     justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    border-radius: 5px;
-    border: 2px solid #888;
-    font-weight: bold;
-    color: #888;
+    font-family:     "JetBrains Mono", monospace;
+    border-radius:   5px;
+    border:          2px solid #888;
+    font-weight:     bold;
+    color:           #888;
 }
 
 #wordle-keyboard .wordle-keyboard-letter:hover {
@@ -283,50 +316,54 @@ div#title button#play-button>span#play-icon {
 }
 
 #wordle-keyboard .wordle-keyboard-letter.incorrect {
-    border-color: #444;
+    border-color:     #444;
     background-color: #444;
-    color: white;
+    color:            white;
 }
+
 #wordle-keyboard .wordle-keyboard-letter.misplaced {
-    border-color: #eb0;
+    border-color:     #eb0;
     background-color: #eb0;
-    color: white;
+    color:            white;
 }
+
 #wordle-keyboard .wordle-keyboard-letter.correct {
-    border-color: #3b5;
+    border-color:     #3b5;
     background-color: #3b5;
-    color: white;
+    color:            white;
 }
 
 #wordle-container:not([data-finished]) #end-game-container {
     display: none;
 }
 
-#wordle-container:not([data-finished]) #end-game-container>#restart-game-button {
+#wordle-container:not([data-finished]) #end-game-container > #restart-game-button {
     display: none;
 }
-#wordle-container[data-finished] #end-game-container>#restart-game-button {
-    display: inline-block;
-    animation: rotate-appear 1s;
-    transform: rotate(180deg);
+
+#wordle-container[data-finished] #end-game-container > #restart-game-button {
+    display:    inline-block;
+    animation:  rotate-appear 1s;
+    transform:  rotate(180deg);
     transition: transform .2s;
 }
-#wordle-container[data-finished] #end-game-container>#restart-game-button:hover {
+
+#wordle-container[data-finished] #end-game-container > #restart-game-button:hover {
     transform: rotate(180deg) scale(1.2);
 }
 
 #end-game-container {
-    width: 100%;
+    width:      100%;
     text-align: center;
 }
 
 button#restart-game-button {
     background-image: url(res/restart.png);
-    width: 64px;
-    height: 64px;
-    background-size: contain;
+    width:            64px;
+    height:           64px;
+    background-size:  contain;
     background-color: transparent;
-    border-radius: 0;
+    border-radius:    0;
 }
 
 #wordle-container[data-finished] div#wordle-input,
@@ -335,7 +372,8 @@ button#restart-game-button {
 }
 
 #wordle-scroller {
-    display: flex;
+    display:        flex;
     flex-direction: column;
-    position: relative;
+    position:       relative;
 }
+
