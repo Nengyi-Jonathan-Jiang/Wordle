@@ -33,7 +33,7 @@ document.getElementById('give-up-button').onclick = () => {
     for(let i = 0; i < targetWord.length; i++) onKeyPress('backspace');
     for(let char of targetWord) onKeyPress(char);
     onKeyPress('enter');
-    [...[...document.querySelectorAll('.wordle-result')].pop().children].forEach(i => {
+    [...[...document.querySelectorAll('.constraint')].pop().children].forEach(i => {
         i.classList.add('surrender');
     });
 }
@@ -209,7 +209,7 @@ function startGame(wordLength, allowAnyWord, guessAnyWord) {
 function addToHistory(result) {
     previousGuesses.push(result);
     let entry = document.createElement('div');
-    entry.className = 'wordle-result';
+    entry.className = 'constraint';
     for (let i = 0; i < result.wordLength; i++) {
         let s = document.createElement('span');
         s.className = `wordle-letter ${result.results[i]}`

@@ -8,6 +8,7 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 import java.nio.file.Files;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Server {
     private static final Map<String, String> MIMETypes = Map.of(
@@ -94,11 +95,7 @@ public class Server {
         server.stop(1000);
     }
 
-    public static void startServerAt(int port) {
-        new Server(port);
-    }
-
-    public static void main(String[] args) {
-        Server.startServerAt(80);
+    public static void main(String[] args) throws InterruptedException {
+        Server server = new Server(80);
     }
 }

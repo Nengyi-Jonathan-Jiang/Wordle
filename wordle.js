@@ -133,24 +133,11 @@ export class WordleResult {
 
     /** @param {String} word */
     matches(word) {
-        if (word.length !== this.wordLength) return false;
-        let charMap = new Map();
-        for (let i = 0; i < this.wordLength; i++) {
-            let c = word[i];
-            if (this.guess[i] === c) {
-                if (this.results[i] !== WordleResult.CORRECT) return false;
-            } else {
-                if (this.results[i] === WordleResult.CORRECT) return false;
-                charMap.set(c, (charMap.get(c) || 0) + 1)
-            }
-        }
-        for (let i = 0; i < this.wordLength; i++) {
-            if (this.results[i] === WordleResult.CORRECT) continue;
-            let c = this.guess[i];
-            if (charMap.get(c) > 0) {
-                if (this.results[i] !== WordleResult.MISPLACED) return true
-                charMap.set(c, charMap.get(c) - 1);
-            } else if (this.results[i] !== WordleResult.INCORRECT) return true
+        if(word.length !== this.wordLength) return false;
+
+        let other = WordleResult.generate(this.wordLength, word, this.guess);
+        for(let i = 0; i < this.wordLength; i++) {
+            if(other.results[i] !== this.results[i]) return false;
         }
         return true;
     }

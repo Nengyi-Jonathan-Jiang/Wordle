@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+
+		<link rel="stylesheet" href="../ui.css" type="text/css">
+		<link rel="stylesheet" href="../wordle.css" type="text/css">
+		<link rel="stylesheet" href="../solver.css" type="text/css">
+	</head>
+	<body>
+		<div id="solver-container">
+			<div id="input">
+				<div id="constraints-container">
+					<label>
+						<input type="text" id="guess-input" maxlength="24">
+					</label>
+					<div id="constraints-display">
+<!--						<div class="letter-query"><span>count('e')>0</span><button>-</button></div>-->
+<!--						<div class="constraint"><span class="wordle-letter incorrect">A</span><span class="wordle-letter incorrect">P</span><span class="wordle-letter incorrect">P</span><span class="wordle-letter incorrect">L</span><span class="wordle-letter incorrect">E</span><button>-</button></div>-->
+<!--						<div class="letter-query"><span>count('e')>0</span><button>-</button></div>-->
+<!--						<div class="letter-query"><span>count('e')>0</span><button>-</button></div>-->
+<!--						<div class="constraint"><span class="wordle-letter incorrect">A</span><span class="wordle-letter incorrect">P</span><span class="wordle-letter incorrect">P</span><span class="wordle-letter incorrect">L</span><span class="wordle-letter incorrect">E</span><button>-</button></div>-->
+<!--						<div class="constraint"><span class="wordle-letter incorrect">A</span><span class="wordle-letter incorrect">P</span><span class="wordle-letter incorrect">P</span><span class="wordle-letter incorrect">L</span><span class="wordle-letter incorrect">E</span><button>-</button></div>-->
+					</div>
+				</div>
+				<div>
+					<p id="command-syntax">
+						To add a constraint, type one of the following in the box: <br><br>
+						1) A guess result. Use lowercase for incorrect (gray) letters, uppercase for correct (green)
+						letters, and for misplaced (yellow) letters, precede them with a period. If you wish to omit
+						a letter (meaning that anything can go into that spot), use a dash.
+						<br><br>
+						Example: .ap-L-
+						<br><br>
+						2) A letter count. Type a letter, a comparison operator (<, =, >), and a number.
+						<br><br>
+						Example: e > 0
+						<br><br>
+						3) Show only common words. Literally type "_common" (without the quotes)
+						<br><br>
+						You must have at least one guess result for results to show up. This may be simply a string of dashes.
+					</p>
+				</div>
+			</div>
+			<div id="output">
+				<h3></h3>
+				<div id="output-words"></div>
+			</div>
+		</div>
+		<script type="module" src="solver.js"></script>
+	</body>
+</html>
